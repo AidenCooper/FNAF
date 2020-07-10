@@ -1,0 +1,9 @@
+name: Fnaf
+version: ${project.version}
+main: me.majeek.fnaf.Fnaf
+api-version: 1.16
+authors: [Majeek]
+description: Fnaf plugin
+commands:
+  fnaf:
+    description: Main command
