@@ -29,15 +29,15 @@ public class FnafConfig {
         fnafConfig.addDefault("office.spawn.yaw", 0);
         fnafConfig.addDefault("office.spawn.pitch", 0);
 
-        fnafConfig.addDefault("office.doors.door1.material", "STONE");
-        fnafConfig.addDefault("office.doors.door1.x", 97);
-        fnafConfig.addDefault("office.doors.door1.y", 4);
-        fnafConfig.addDefault("office.doors.door1.z", 16);
+        fnafConfig.addDefault("office.doors.left.material", "STONE");
+        fnafConfig.addDefault("office.doors.left.x", 103);
+        fnafConfig.addDefault("office.doors.left.y", 4);
+        fnafConfig.addDefault("office.doors.left.z", 16);
 
-        fnafConfig.addDefault("office.doors.door2.material", "STONE");
-        fnafConfig.addDefault("office.doors.door2.x", 103);
-        fnafConfig.addDefault("office.doors.door2.y", 4);
-        fnafConfig.addDefault("office.doors.door2.z", 16);
+        fnafConfig.addDefault("office.doors.right.material", "STONE");
+        fnafConfig.addDefault("office.doors.right.x", 97);
+        fnafConfig.addDefault("office.doors.right.y", 4);
+        fnafConfig.addDefault("office.doors.right.z", 16);
 
         fnafConfig.addDefault("animatronics.bonnie.spawn.x", 102.5);
         fnafConfig.addDefault("animatronics.bonnie.spawn.y", 4.5);

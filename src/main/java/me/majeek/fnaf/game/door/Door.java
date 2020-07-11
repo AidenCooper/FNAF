@@ -2,18 +2,22 @@ package me.majeek.fnaf.game.door;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerMoveEvent;
 
 public class Door {
+    private String name;
     private Material material;
     private Location location;
 
     private boolean open;
 
-    public Door(Material material, Location location) {
+    public Door(String name, Material material, Location location) {
+        this.name = name;
         this.material = material;
         this.location = location;
+    }
+
+    public String getName(){
+        return name;
     }
 
     public Material getMaterial(){
@@ -24,15 +28,26 @@ public class Door {
         return location;
     }
 
+    public void open(){
+        location.getBlock().setType(Material.AIR);
+        getAbove().getBlock().setType(Material.AIR);
+    }
+
+    public void close(){
+        location.getBlock().setType(material);
+        getAbove().getBlock().setType(material);
+    }
+
     public boolean isClosed(){
-        if(location.getBlock().getType() == material)
+        if(location.getBlock().getType() == material || getAbove().getBlock().getType() == material)
             return true;
         else
             return false;
     }
 
-    @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event){
-
+    private Location getAbove(){
+        Location aboveBlock = location.clone();
+        aboveBlock.setY(aboveBlock.getY() + 1);
+        return aboveBlock;
     }
 }

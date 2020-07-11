@@ -5,6 +5,8 @@ import me.majeek.fnaf.game.camera.CameraManager;
 import me.majeek.fnaf.files.FnafConfig;
 import me.majeek.fnaf.game.characters.animatronic.AnimatronicManager;
 import me.majeek.fnaf.game.data.DataManager;
+import me.majeek.fnaf.game.door.DoorManager;
+import me.majeek.fnaf.game.item.ItemManager;
 import me.majeek.fnaf.listeners.CommandListener;
 import me.majeek.fnaf.listeners.EventListener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,6 +18,8 @@ public final class Fnaf extends JavaPlugin {
     private AnimatronicManager animatronicManager;
     private CameraManager cameraManager;
     private DataManager dataManager;
+    private DoorManager doorManager;
+    private ItemManager itemManager;
 
     @Override
     public void onEnable() {
@@ -32,6 +36,8 @@ public final class Fnaf extends JavaPlugin {
         animatronicManager = new AnimatronicManager();
         cameraManager = new CameraManager();
         dataManager = new DataManager();
+        doorManager = new DoorManager();
+        itemManager = new ItemManager();
 
         // Listeners
         getServer().getPluginManager().registerEvents(new EventListener(), this);
@@ -61,5 +67,13 @@ public final class Fnaf extends JavaPlugin {
 
     public DataManager getDataManager(){
         return dataManager;
+    }
+
+    public DoorManager getDoorManager() {
+        return doorManager;
+    }
+
+    public ItemManager getItemManager(){
+        return itemManager;
     }
 }

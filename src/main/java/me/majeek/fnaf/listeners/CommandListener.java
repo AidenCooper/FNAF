@@ -1,6 +1,7 @@
 package me.majeek.fnaf.listeners;
 
 import me.majeek.fnaf.Fnaf;
+import me.majeek.fnaf.files.FnafConfig;
 import me.majeek.fnaf.game.Game;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,6 +23,8 @@ public class CommandListener implements CommandExecutor {
                     start(player);
                 else if(args[0].equalsIgnoreCase("stop") && player.hasPermission("fnaf.stop"))
                     stop(player);
+                else if(args[0].equalsIgnoreCase("reload") && player.hasPermission("fnaf.reload"))
+                    reload(player);
                 else
                     player.sendMessage("Unknown command. Type \"/help\" for help.");
             } else{
@@ -40,6 +43,7 @@ public class CommandListener implements CommandExecutor {
         sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.GREEN + "/fnaf help" + ChatColor.WHITE + " - " + ChatColor.GRAY + "Displays this.");
         sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.GREEN + "/fnaf start" + ChatColor.WHITE + " - " + ChatColor.GRAY + "Starts the game with the current players in the world.");
         sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.GREEN + "/fnaf stop" + ChatColor.WHITE + " - " + ChatColor.GRAY + "Stops the game.");
+        sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.GREEN + "/fnaf reload" + ChatColor.WHITE + " - " + ChatColor.GRAY + "Reloads the config.");
     }
 
     private void start(Player sender){
@@ -64,7 +68,12 @@ public class CommandListener implements CommandExecutor {
             Bukkit.broadcastMessage(ChatColor.GREEN + "Stopping current game.");
             Fnaf.getInstance().getGame().stop();
         } else{
-            Bukkit.broadcastMessage(ChatColor.RED + "No game is currently in progress.");
+            sender.sendMessage(ChatColor.RED + "No game is currently in progress.");
         }
+    }
+
+    private void reload(Player sender){
+        FnafConfig.reload();
+        sender.sendMessage(ChatColor.GREEN + "Reload complete.");
     }
 }
