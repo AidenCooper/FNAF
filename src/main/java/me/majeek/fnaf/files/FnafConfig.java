@@ -39,6 +39,16 @@ public class FnafConfig {
         fnafConfig.addDefault("office.doors.right.y", 4);
         fnafConfig.addDefault("office.doors.right.z", 16);
 
+        fnafConfig.addDefault("office.lights.left.material", "GLOWSTONE");
+        fnafConfig.addDefault("office.lights.left.x", 105.5);
+        fnafConfig.addDefault("office.lights.left.y", 14);
+        fnafConfig.addDefault("office.lights.left.z", 16.5);
+
+        fnafConfig.addDefault("office.lights.right.material", "GLOWSTONE");
+        fnafConfig.addDefault("office.lights.right.x", 95.5);
+        fnafConfig.addDefault("office.lights.right.y", 14);
+        fnafConfig.addDefault("office.lights.right.z", 16.5);
+
         fnafConfig.addDefault("animatronics.bonnie.spawn.x", 102.5);
         fnafConfig.addDefault("animatronics.bonnie.spawn.y", 4.5);
         fnafConfig.addDefault("animatronics.bonnie.spawn.z", 47.5);

@@ -1,8 +1,6 @@
 package me.majeek.fnaf.game.item;
 
-import me.majeek.fnaf.game.item.items.CameraItem;
-import me.majeek.fnaf.game.item.items.LeftDoorItem;
-import me.majeek.fnaf.game.item.items.RightDoorItem;
+import me.majeek.fnaf.game.item.items.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +12,8 @@ public class ItemManager {
         items.add(new CameraItem());
         items.add(new LeftDoorItem());
         items.add(new RightDoorItem());
+        items.add(new LeftLightItem());
+        items.add(new RightLightItem());
     }
 
     public List<Item> getItems() {

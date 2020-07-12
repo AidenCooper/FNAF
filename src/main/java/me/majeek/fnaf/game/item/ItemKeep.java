@@ -4,6 +4,7 @@ import me.majeek.fnaf.Fnaf;
 import me.majeek.fnaf.files.FnafConfig;
 import me.majeek.fnaf.game.camera.Camera;
 import me.majeek.fnaf.game.door.Door;
+import me.majeek.fnaf.game.light.Light;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -15,8 +16,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 public class ItemKeep implements Listener {
     @EventHandler
@@ -32,6 +31,12 @@ public class ItemKeep implements Listener {
                         break;
                     case "Right Door":
                         rightDoor();
+                        break;
+                    case "Left Light":
+                        leftLight();
+                        break;
+                    case "Right Light":
+                        rightLight();
                         break;
                 }
             }
@@ -83,6 +88,34 @@ public class ItemKeep implements Listener {
             rightDoor.open();
         } else{
             rightDoor.close();
+        }
+    }
+
+    private void leftLight(){
+        if(!Fnaf.getInstance().getCameraManager().getCamera("OFFICE").isOccupied() || !Fnaf.getInstance().getCameraManager().getCamera("OFFICE").getOccupant().getName().equalsIgnoreCase(Fnaf.getInstance().getDataManager().getGuard().getPlayer().getName())){
+            return;
+        }
+
+        Light leftLight = Fnaf.getInstance().getLightManager().getLight("Left Light");
+
+        if(leftLight.isLit()){
+            leftLight.unLight();
+        } else{
+            leftLight.light();
+        }
+    }
+
+    private void rightLight(){
+        if(!Fnaf.getInstance().getCameraManager().getCamera("OFFICE").isOccupied() || !Fnaf.getInstance().getCameraManager().getCamera("OFFICE").getOccupant().getName().equalsIgnoreCase(Fnaf.getInstance().getDataManager().getGuard().getPlayer().getName())){
+            return;
+        }
+
+        Light rightLight = Fnaf.getInstance().getLightManager().getLight("Right Light");
+
+        if(rightLight.isLit()){
+            rightLight.unLight();
+        } else{
+            rightLight.light();
         }
     }
 }

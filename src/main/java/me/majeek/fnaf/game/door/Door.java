@@ -8,8 +8,6 @@ public class Door {
     private Material material;
     private Location location;
 
-    private boolean open;
-
     public Door(String name, Material material, Location location) {
         this.name = name;
         this.material = material;
@@ -39,10 +37,7 @@ public class Door {
     }
 
     public boolean isClosed(){
-        if(location.getBlock().getType() == material || getAbove().getBlock().getType() == material)
-            return true;
-        else
-            return false;
+        return location.getBlock().getType() == material || getAbove().getBlock().getType() == material;
     }
 
     private Location getAbove(){
