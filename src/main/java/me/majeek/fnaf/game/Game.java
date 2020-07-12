@@ -4,8 +4,9 @@ import me.majeek.fnaf.Fnaf;
 import me.majeek.fnaf.files.FnafConfig;
 import me.majeek.fnaf.game.characters.Guard;
 import me.majeek.fnaf.game.characters.animatronic.Animatronic;
-import me.majeek.fnaf.game.characters.animatronic.animatronics.Bonnie;
+import me.majeek.fnaf.game.door.Door;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
@@ -27,11 +28,11 @@ public class Game {
 
         guard.toSpawn();
         guard.getPlayer().getInventory().clear();
+        guard.getPlayer().setGameMode(GameMode.ADVENTURE);
         guard.getItems();
 
         for(Animatronic animatronic : animatronics) {
-            animatronic.toSpawn();
-            animatronic.getPlayer().getInventory().clear();
+            animatronic.spawn();
         }
     }
 
@@ -47,50 +48,29 @@ public class Game {
             players.add(Fnaf.getInstance().getDataManager().getGuard().getPlayer());
 
         if(Fnaf.getInstance().getDataManager().getAnimatronics() != null)
-            for (int i = 0; i < Fnaf.getInstance().getDataManager().getAnimatronics().size(); i++)
-                players.add(Fnaf.getInstance().getDataManager().getAnimatronics().get(i).getPlayer());
+            for (Animatronic animatronic : Fnaf.getInstance().getDataManager().getAnimatronics())
+                animatronic.remove();
 
         for (Player player : players) {
-            if(player != null && player.getInventory().getSize() > 0) {
-                player.getInventory().clear();
-                player.teleport(Fnaf.getInstance().getDataManager().getWorld().getSpawnLocation());
-            }
+            player.getInventory().clear();
+            player.setGameMode(GameMode.ADVENTURE);
+            player.teleport(Fnaf.getInstance().getDataManager().getWorld().getSpawnLocation());
         }
+
+        for(Door door : Fnaf.getInstance().getDoorManager().getDoors())
+            door.open();
 
         Fnaf.getInstance().getDataManager().setWorld(null);
         Fnaf.getInstance().getDataManager().setGuard(null);
         Fnaf.getInstance().getDataManager().setAnimatronics(null);
     }
 
-    public void initialize(){
+    public void initialize(Player player){
         World world = Bukkit.getWorld(FnafConfig.get().getString("world"));
-        Guard guard = null;
-        List<Animatronic> animatronics = new ArrayList<>();
+        Guard guard = new Guard(player);
+        List<Animatronic> animatronics = new ArrayList<>(Fnaf.getInstance().getAnimatronicManager().getAnimatronics());
 
-        if(world != null && world.getPlayerCount() >= 2){
-            List<Player> worldPlayers = world.getPlayers();
-
-            int randomNumber = (int) (Math.random() * worldPlayers.size());
-
-            guard = new Guard(worldPlayers.get(randomNumber));
-            worldPlayers.remove(randomNumber);
-
-            List<Animatronic> animatronicList = Fnaf.getInstance().getAnimatronicManager().getAnimatronics();
-
-            for(int i = 0; i < worldPlayers.size(); i++){
-                if(i < Fnaf.getInstance().getAnimatronicManager().getAnimatronics().size()){
-                    randomNumber = (int) (Math.random() * animatronicList.size());
-
-                    animatronicList.get(randomNumber).setPlayer(worldPlayers.get(i));
-                    animatronics.add(animatronicList.get(randomNumber));
-                    animatronicList.remove(randomNumber);
-                } else{
-                    break;
-                }
-            }
-        }
-
-        if(world != null && guard != null && animatronics.size() > 0) {
+        if(world != null) {
             Fnaf.getInstance().getDataManager().setWorld(world);
             Fnaf.getInstance().getDataManager().setGuard(guard);
             Fnaf.getInstance().getDataManager().setAnimatronics(animatronics);

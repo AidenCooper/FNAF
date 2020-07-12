@@ -25,7 +25,7 @@ public class FnafConfig {
 
         fnafConfig.addDefault("office.spawn.x", 100.5);
         fnafConfig.addDefault("office.spawn.y", 4);
-        fnafConfig.addDefault("office.spawn.z", 13.5);
+        fnafConfig.addDefault("office.spawn.z", 14.5);
         fnafConfig.addDefault("office.spawn.yaw", 0);
         fnafConfig.addDefault("office.spawn.pitch", 0);
 
@@ -41,27 +41,27 @@ public class FnafConfig {
 
         fnafConfig.addDefault("animatronics.bonnie.spawn.x", 102.5);
         fnafConfig.addDefault("animatronics.bonnie.spawn.y", 4.5);
-        fnafConfig.addDefault("animatronics.bonnie.spawn.z", 46.5);
+        fnafConfig.addDefault("animatronics.bonnie.spawn.z", 47.5);
         fnafConfig.addDefault("animatronics.bonnie.spawn.yaw", 180);
         fnafConfig.addDefault("animatronics.bonnie.spawn.pitch", 0);
 
         fnafConfig.addDefault("animatronics.chica.spawn.x", 98.5);
         fnafConfig.addDefault("animatronics.chica.spawn.y", 4.5);
-        fnafConfig.addDefault("animatronics.chica.spawn.z", 46.5);
+        fnafConfig.addDefault("animatronics.chica.spawn.z", 47.5);
         fnafConfig.addDefault("animatronics.chica.spawn.yaw", 180);
         fnafConfig.addDefault("animatronics.chica.spawn.pitch", 0);
 
-        fnafConfig.addDefault("animatronics.foxy.spawn.x", 100.5);
+        fnafConfig.addDefault("animatronics.foxy.spawn.x", 116.5);
         fnafConfig.addDefault("animatronics.foxy.spawn.y", 4.5);
-        fnafConfig.addDefault("animatronics.foxy.spawn.z", 46.5);
-        fnafConfig.addDefault("animatronics.foxy.spawn.yaw", 180);
+        fnafConfig.addDefault("animatronics.foxy.spawn.z", 30.5);
+        fnafConfig.addDefault("animatronics.foxy.spawn.yaw", 90);
         fnafConfig.addDefault("animatronics.foxy.spawn.pitch", 0);
 
         fnafConfig.addDefault("animatronics.freddy.spawn.x", 100.5);
         fnafConfig.addDefault("animatronics.freddy.spawn.y", 4.5);
-        fnafConfig.addDefault("animatronics.freddy.spawn.z", 46.5);
-        fnafConfig.addDefault("animatronics.freddy.spawn.yaw", 0);
-        fnafConfig.addDefault("animatronics.freddy.spawn.pitch", 180);
+        fnafConfig.addDefault("animatronics.freddy.spawn.z", 47.5);
+        fnafConfig.addDefault("animatronics.freddy.spawn.yaw", 180);
+        fnafConfig.addDefault("animatronics.freddy.spawn.pitch", 0);
     }
 
     public static FileConfiguration get(){
@@ -74,6 +74,7 @@ public class FnafConfig {
     }
 
     public static void reload(){
+        setup();
         fnafConfig = YamlConfiguration.loadConfiguration(file);
     }
 }

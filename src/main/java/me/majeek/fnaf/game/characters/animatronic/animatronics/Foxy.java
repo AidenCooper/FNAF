@@ -1,18 +1,10 @@
 package me.majeek.fnaf.game.characters.animatronic.animatronics;
 
-import me.majeek.fnaf.files.FnafConfig;
 import me.majeek.fnaf.game.characters.animatronic.Animatronic;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import org.bukkit.Color;
 
 public class Foxy extends Animatronic {
     public Foxy() {
-        super("foxy");
-    }
-
-    @Override
-    public void toSpawn() {
-        Location spawn = new Location(Bukkit.getWorld(FnafConfig.get().getString("world")), FnafConfig.get().getDouble("animatronics.foxy.spawn.x"), FnafConfig.get().getDouble("animatronics.foxy.spawn.y"), FnafConfig.get().getDouble("animatronics.foxy.spawn.z"), FnafConfig.get().getInt("animatronics.foxy.spawn.yaw"), FnafConfig.get().getInt("animatronics.foxy.spawn.pitch"));
-        getPlayer().teleport(spawn);
+        super("Foxy", Color.fromRGB(92, 25, 20), "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzdhN2M5YTM5M2I4YmRmYjQ0YTc5MWU2OTA5M2Y2NGZiNTY4ZThmZTZjZjQ2M2ZlZGQ4ZmVmZDMxN2Q2ZDMyIn19fQ==");
     }
 }

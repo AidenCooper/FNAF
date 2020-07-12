@@ -1,5 +1,6 @@
 package me.majeek.fnaf.game.data;
 
+import me.majeek.fnaf.game.camera.Camera;
 import me.majeek.fnaf.game.characters.Guard;
 import me.majeek.fnaf.game.characters.animatronic.Animatronic;
 import org.bukkit.World;

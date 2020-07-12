@@ -2,25 +2,30 @@ package me.majeek.fnaf.game.item;
 
 import me.majeek.fnaf.Fnaf;
 import me.majeek.fnaf.files.FnafConfig;
+import me.majeek.fnaf.game.camera.Camera;
 import me.majeek.fnaf.game.door.Door;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
-public class ItemEvents implements Listener {
+public class ItemKeep implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
         if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (event.getItem() != null && event.getItem().getItemMeta() != null) {
                 switch (event.getItem().getItemMeta().getLocalizedName()){
                     case "Camera":
-                        camera();
+                        camera(event.getPlayer());
                         break;
                     case "Left Door":
                         leftDoor();
@@ -49,11 +54,15 @@ public class ItemEvents implements Listener {
         }
     }
 
-    private void camera(){
-
+    private void camera(Player player){
+        Fnaf.getInstance().getCameraManager().openGui(player);
     }
 
     private void leftDoor(){
+        if(!Fnaf.getInstance().getCameraManager().getCamera("OFFICE").isOccupied() || !Fnaf.getInstance().getCameraManager().getCamera("OFFICE").getOccupant().getName().equalsIgnoreCase(Fnaf.getInstance().getDataManager().getGuard().getPlayer().getName())){
+            return;
+        }
+
         Door leftDoor = Fnaf.getInstance().getDoorManager().getDoor("Left Door");
 
         if(leftDoor.isClosed()){
@@ -64,6 +73,10 @@ public class ItemEvents implements Listener {
     }
 
     private void rightDoor(){
+        if(!Fnaf.getInstance().getCameraManager().getCamera("OFFICE").isOccupied() || !Fnaf.getInstance().getCameraManager().getCamera("OFFICE").getOccupant().getName().equalsIgnoreCase(Fnaf.getInstance().getDataManager().getGuard().getPlayer().getName())){
+            return;
+        }
+
         Door rightDoor = Fnaf.getInstance().getDoorManager().getDoor("Right Door");
 
         if(rightDoor.isClosed()){

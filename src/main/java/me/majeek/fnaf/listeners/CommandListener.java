@@ -52,7 +52,7 @@ public class CommandListener implements CommandExecutor {
             return;
         }
 
-        Fnaf.getInstance().getGame().initialize();
+        Fnaf.getInstance().getGame().initialize(sender);
 
         if(!Fnaf.getInstance().getGame().isInitialized()){
             sender.sendMessage(ChatColor.RED + "Failed to initialize.");

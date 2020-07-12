@@ -1,18 +1,10 @@
 package me.majeek.fnaf.game.characters.animatronic.animatronics;
 
-import me.majeek.fnaf.files.FnafConfig;
 import me.majeek.fnaf.game.characters.animatronic.Animatronic;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import org.bukkit.Color;
 
 public class Freddy extends Animatronic {
     public Freddy() {
-        super("freddy");
-    }
-
-    @Override
-    public void toSpawn() {
-        Location spawn = new Location(Bukkit.getWorld(FnafConfig.get().getString("world")), FnafConfig.get().getDouble("animatronics.freddy.spawn.x"), FnafConfig.get().getDouble("animatronics.freddy.spawn.y"), FnafConfig.get().getDouble("animatronics.freddy.spawn.z"), FnafConfig.get().getInt("animatronics.freddy.spawn.yaw"), FnafConfig.get().getInt("animatronics.freddy.spawn.pitch"));
-        getPlayer().teleport(spawn);
+        super("Freddy", Color.fromRGB(88, 49, 19), "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWUxNTEwMzE5MDc5MzVmZTc0ODMwYmQwZmZmZjQ2MzhiNjYxYzEwYmM5M2I3ZDJkZWNlNWU1NGY2Zjc0NWZlYiJ9fX0=");
     }
 }

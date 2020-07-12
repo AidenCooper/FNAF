@@ -4,6 +4,7 @@ main: me.majeek.fnaf.Fnaf
 api-version: 1.16
 authors: [Majeek]
 description: Fnaf plugin
+depend: [ProtocolLib]
 commands:
   fnaf:
     description: Main command
