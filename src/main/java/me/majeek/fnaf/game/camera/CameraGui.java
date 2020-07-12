@@ -1,7 +1,6 @@
 package me.majeek.fnaf.game.camera;
 
 import me.majeek.fnaf.Fnaf;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +14,13 @@ public class CameraGui implements Listener {
             if(event.getCurrentItem() != null){
                 for(Camera camera : Fnaf.getInstance().getCameraManager().getCameras()){
                     if(event.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase(camera.getName())){
-                        camera.useCamera((Player) event.getWhoClicked());
+                        if(camera.isEnabled()) {
+                            camera.useCamera((Player) event.getWhoClicked());
+                        } else{
+                            event.getWhoClicked().sendMessage(ChatColor.RED + "[" + camera.getName() + "] Camera is disabled.");
+                            event.getWhoClicked().closeInventory();
+                        }
+
                         event.setCancelled(true);
                     }
                 }

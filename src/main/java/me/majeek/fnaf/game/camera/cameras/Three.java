@@ -5,8 +5,8 @@ import me.majeek.fnaf.game.camera.Camera;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
-public class OneA extends Camera {
-    public OneA() {
-        super("CAM 1A", new Location(Bukkit.getWorld(FnafConfig.get().getString("world")), 104.5, 5.5, 45.5, 64, 13), true);
+public class Three extends Camera {
+    public Three() {
+        super("CAM 3", new Location(Bukkit.getWorld(FnafConfig.get().getString("world")), 108.5, 6.5, 22.5, -165, 46), true);
     }
 }

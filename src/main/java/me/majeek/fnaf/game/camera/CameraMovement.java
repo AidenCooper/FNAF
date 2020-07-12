@@ -2,7 +2,6 @@ package me.majeek.fnaf.game.camera;
 
 import me.majeek.fnaf.Fnaf;
 import me.majeek.fnaf.events.PlayerLookEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -59,7 +59,7 @@ public class FnafConfig {
 
         fnafConfig.addDefault("animatronics.freddy.spawn.x", 100.5);
         fnafConfig.addDefault("animatronics.freddy.spawn.y", 4.5);
-        fnafConfig.addDefault("animatronics.freddy.spawn.z", 47.5);
+        fnafConfig.addDefault("animatronics.freddy.spawn.z", 46.5);
         fnafConfig.addDefault("animatronics.freddy.spawn.yaw", 180);
         fnafConfig.addDefault("animatronics.freddy.spawn.pitch", 0);
     }
