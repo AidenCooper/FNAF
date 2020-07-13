@@ -2,6 +2,7 @@ package me.majeek.fnaf.game.camera;
 
 import me.majeek.fnaf.Fnaf;
 import me.majeek.fnaf.events.CameraUseEvent;
+import me.majeek.fnaf.game.light.Light;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -53,15 +54,8 @@ public class Camera {
             }
         }
 
-        if (!eventCalled) {
-            Fnaf.getInstance().getServer().getPluginManager().callEvent(new CameraUseEvent(player, null, this));
-        }
-
-        if (name.equalsIgnoreCase("OFFICE")) {
-            player.showPlayer(Fnaf.getInstance(), player);
-        } else {
-            player.hidePlayer(Fnaf.getInstance(), player);
-        }
+        if (!eventCalled)
+            Fnaf.getInstance().getServer().getPluginManager().callEvent(new CameraUseEvent(player, this, this));
 
         player.setSneaking(true);
         player.teleport(location);

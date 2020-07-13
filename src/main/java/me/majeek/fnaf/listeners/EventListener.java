@@ -5,6 +5,9 @@ import me.majeek.fnaf.game.camera.CameraGui;
 import me.majeek.fnaf.game.camera.CameraMovement;
 import me.majeek.fnaf.game.camera.CameraOccupant;
 import me.majeek.fnaf.game.item.ItemKeep;
+import me.majeek.fnaf.game.light.LightCancel;
+import me.majeek.fnaf.game.power.PowerChangeUsage;
+import me.majeek.fnaf.game.power.PowerIndicator;
 import org.bukkit.event.Listener;
 
 public class EventListener implements Listener {
@@ -13,5 +16,8 @@ public class EventListener implements Listener {
         Fnaf.getInstance().getServer().getPluginManager().registerEvents(new CameraMovement(), Fnaf.getInstance());
         Fnaf.getInstance().getServer().getPluginManager().registerEvents(new CameraOccupant(), Fnaf.getInstance());
         Fnaf.getInstance().getServer().getPluginManager().registerEvents(new ItemKeep(), Fnaf.getInstance());
+        Fnaf.getInstance().getServer().getPluginManager().registerEvents(new LightCancel(), Fnaf.getInstance());
+        Fnaf.getInstance().getServer().getPluginManager().registerEvents(new PowerChangeUsage(), Fnaf.getInstance());
+        Fnaf.getInstance().getServer().getPluginManager().registerEvents(new PowerIndicator(), Fnaf.getInstance());
     }
 }

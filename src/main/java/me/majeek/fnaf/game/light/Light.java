@@ -1,17 +1,16 @@
 package me.majeek.fnaf.game.light;
 
+import me.majeek.fnaf.Fnaf;
+import me.majeek.fnaf.events.LightUseEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
 public class Light {
     private String name;
-    private Material material;
-    private Location location;
 
-    public Light(String name, Material material, Location location) {
+    public Light(String name) {
         this.name = name;
-        this.material = material;
-        this.location = location;
     }
 
     public String getName(){
@@ -19,22 +18,30 @@ public class Light {
     }
 
     public Material getMaterial(){
-        return material;
+        return Material.AIR;
     }
 
     public Location getLocation(){
-        return location;
+        return new Location(Bukkit.getWorld("world"), 0, 0, 0);
     }
 
     public void light(){
-        location.getBlock().setType(material);
+        for(Light light : Fnaf.getInstance().getLightManager().getLights())
+            if(light != this && light.isLit())
+                light.unLight();
+
+        Fnaf.getInstance().getServer().getPluginManager().callEvent(new LightUseEvent(this, true));
+
+        getLocation().getBlock().setType(getMaterial());
     }
 
     public void unLight(){
-        location.getBlock().setType(Material.AIR);
+        Fnaf.getInstance().getServer().getPluginManager().callEvent(new LightUseEvent(this, false));
+
+        getLocation().getBlock().setType(Material.AIR);
     }
 
     public boolean isLit(){
-        return location.getBlock().getType() == material;
+        return getLocation().getBlock().getType() == getMaterial();
     }
 }

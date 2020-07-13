@@ -8,6 +8,16 @@ import org.bukkit.Material;
 
 public class LeftLight extends Light {
     public LeftLight() {
-        super("Left Light", Material.valueOf(FnafConfig.get().getString("office.lights.left.material")), new Location(Bukkit.getWorld(FnafConfig.get().getString("world")), FnafConfig.get().getInt("office.lights.left.x"), FnafConfig.get().getInt("office.lights.left.y"), FnafConfig.get().getInt("office.lights.left.z")));
+        super("Left Light");
+    }
+
+    @Override
+    public Material getMaterial() {
+        return Material.valueOf(FnafConfig.get().getString("office.lights.left.material"));
+    }
+
+    @Override
+    public Location getLocation() {
+        return new Location(Bukkit.getWorld(FnafConfig.get().getString("world")), FnafConfig.get().getInt("office.lights.left.x"), FnafConfig.get().getInt("office.lights.left.y"), FnafConfig.get().getInt("office.lights.left.z"));
     }
 }

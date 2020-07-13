@@ -19,15 +19,12 @@ public class Animatronic {
     private Color color;
     private String headTexture;
 
-    private Location spawn;
     private ArmorStand armorStand;
 
     public Animatronic(String name, Color color, String headTexture){
         this.name = name;
         this.color = color;
         this.headTexture = headTexture;
-
-        spawn = new Location(Bukkit.getWorld(FnafConfig.get().getString("world")), FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.x"), FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.y"), FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.z"), (float) FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.yaw"), (float) FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.pitch"));
     }
 
     public String getName(){
@@ -43,13 +40,13 @@ public class Animatronic {
     }
 
     public Location getSpawn() {
-        return spawn;
+        return new Location(Bukkit.getWorld(FnafConfig.get().getString("world")), FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.x"), FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.y"), FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.z"), (float) FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.yaw"), (float) FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.pitch"));
     }
 
     @SuppressWarnings("deprecation")
     public void spawn(){
         if(armorStand == null) {
-            armorStand = spawn.getWorld().spawn(spawn, ArmorStand.class);
+            armorStand = getSpawn().getWorld().spawn(getSpawn(), ArmorStand.class);
 
             armorStand.setCustomName(name);
             armorStand.setCustomNameVisible(false);

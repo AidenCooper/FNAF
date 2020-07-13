@@ -2,9 +2,18 @@ package me.majeek.fnaf.game;
 
 import me.majeek.fnaf.Fnaf;
 import me.majeek.fnaf.files.FnafConfig;
+import me.majeek.fnaf.game.camera.CameraManager;
 import me.majeek.fnaf.game.characters.Guard;
 import me.majeek.fnaf.game.characters.animatronic.Animatronic;
+import me.majeek.fnaf.game.characters.animatronic.AnimatronicManager;
+import me.majeek.fnaf.game.data.DataManager;
 import me.majeek.fnaf.game.door.Door;
+import me.majeek.fnaf.game.door.DoorManager;
+import me.majeek.fnaf.game.exp.ExpManager;
+import me.majeek.fnaf.game.item.ItemManager;
+import me.majeek.fnaf.game.light.Light;
+import me.majeek.fnaf.game.light.LightManager;
+import me.majeek.fnaf.game.power.PowerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.World;
@@ -16,8 +25,6 @@ import java.util.List;
 public class Game {
     private boolean inProgress;
     private boolean isInitialized;
-
-    public Game() { }
 
     public void start(){
         inProgress = true;
@@ -34,6 +41,9 @@ public class Game {
         for(Animatronic animatronic : animatronics) {
             animatronic.spawn();
         }
+
+        Fnaf.getInstance().getTimeManager().start();
+        Fnaf.getInstance().getPowerManager().start();
     }
 
     public void stop(){
@@ -60,9 +70,19 @@ public class Game {
         for(Door door : Fnaf.getInstance().getDoorManager().getDoors())
             door.open();
 
-        Fnaf.getInstance().getDataManager().setWorld(null);
-        Fnaf.getInstance().getDataManager().setGuard(null);
-        Fnaf.getInstance().getDataManager().setAnimatronics(null);
+        for(Light light : Fnaf.getInstance().getLightManager().getLights())
+            light.unLight();
+
+        Fnaf.getInstance().getExpManager().setTotalExperience(Fnaf.getInstance().getDataManager().getGuard().getPlayer(), 0);
+
+        Fnaf.getInstance().setAnimatronicManager(new AnimatronicManager());
+        Fnaf.getInstance().setCameraManager(new CameraManager());
+        Fnaf.getInstance().setDataManager(new DataManager());
+        Fnaf.getInstance().setDoorManager(new DoorManager());
+        Fnaf.getInstance().setExpManager(new ExpManager());
+        Fnaf.getInstance().setItemManager(new ItemManager());
+        Fnaf.getInstance().setLightManager(new LightManager());
+        Fnaf.getInstance().setPowerManager(new PowerManager());
     }
 
     public void initialize(Player player){

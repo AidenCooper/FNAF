@@ -6,6 +6,7 @@ import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import me.majeek.fnaf.events.PlayerLookEvent;
+import me.majeek.fnaf.game.exp.ExpManager;
 import me.majeek.fnaf.game.Game;
 import me.majeek.fnaf.game.camera.CameraManager;
 import me.majeek.fnaf.files.FnafConfig;
@@ -14,6 +15,8 @@ import me.majeek.fnaf.game.data.DataManager;
 import me.majeek.fnaf.game.door.DoorManager;
 import me.majeek.fnaf.game.item.ItemManager;
 import me.majeek.fnaf.game.light.LightManager;
+import me.majeek.fnaf.game.power.PowerManager;
+import me.majeek.fnaf.game.time.TimeManager;
 import me.majeek.fnaf.listeners.CommandListener;
 import me.majeek.fnaf.listeners.EventListener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,8 +30,11 @@ public final class Fnaf extends JavaPlugin {
     private CameraManager cameraManager;
     private DataManager dataManager;
     private DoorManager doorManager;
+    private ExpManager expManager;
     private ItemManager itemManager;
     private LightManager lightManager;
+    private PowerManager powerManager;
+    private TimeManager timeManager;
 
     @Override
     public void onEnable() {
@@ -46,8 +52,11 @@ public final class Fnaf extends JavaPlugin {
         cameraManager = new CameraManager();
         dataManager = new DataManager();
         doorManager = new DoorManager();
+        expManager = new ExpManager();
         itemManager = new ItemManager();
         lightManager = new LightManager();
+        powerManager = new PowerManager();
+        timeManager = new TimeManager();
 
         // Listeners
         getServer().getPluginManager().registerEvents(new EventListener(), this);
@@ -86,11 +95,59 @@ public final class Fnaf extends JavaPlugin {
         return doorManager;
     }
 
+    public ExpManager getExpManager() {
+        return expManager;
+    }
+
     public ItemManager getItemManager(){
         return itemManager;
     }
 
     public LightManager getLightManager(){
         return lightManager;
+    }
+
+    public PowerManager getPowerManager() {
+        return powerManager;
+    }
+
+    public TimeManager getTimeManager() {
+        return timeManager;
+    }
+
+    public void setAnimatronicManager(AnimatronicManager animatronicManager) {
+        this.animatronicManager = animatronicManager;
+    }
+
+    public void setCameraManager(CameraManager cameraManager) {
+        this.cameraManager = cameraManager;
+    }
+
+    public void setDataManager(DataManager dataManager) {
+        this.dataManager = dataManager;
+    }
+
+    public void setDoorManager(DoorManager doorManager) {
+        this.doorManager = doorManager;
+    }
+
+    public void setExpManager(ExpManager expManager) {
+        this.expManager = expManager;
+    }
+
+    public void setItemManager(ItemManager itemManager) {
+        this.itemManager = itemManager;
+    }
+
+    public void setLightManager(LightManager lightManager) {
+        this.lightManager = lightManager;
+    }
+
+    public void setPowerManager(PowerManager powerManager) {
+        this.powerManager = powerManager;
+    }
+
+    public void setTimeManager(TimeManager timeManager) {
+        this.timeManager = timeManager;
     }
 }

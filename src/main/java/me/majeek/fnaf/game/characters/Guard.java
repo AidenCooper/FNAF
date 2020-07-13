@@ -1,7 +1,6 @@
 package me.majeek.fnaf.game.characters;
 
 import me.majeek.fnaf.Fnaf;
-import me.majeek.fnaf.files.FnafConfig;
 import me.majeek.fnaf.game.item.items.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

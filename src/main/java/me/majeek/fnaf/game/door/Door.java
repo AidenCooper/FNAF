@@ -1,17 +1,16 @@
 package me.majeek.fnaf.game.door;
 
+import me.majeek.fnaf.Fnaf;
+import me.majeek.fnaf.events.DoorUseEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
 public class Door {
     private String name;
-    private Material material;
-    private Location location;
 
-    public Door(String name, Material material, Location location) {
+    public Door(String name) {
         this.name = name;
-        this.material = material;
-        this.location = location;
     }
 
     public String getName(){
@@ -19,29 +18,33 @@ public class Door {
     }
 
     public Material getMaterial(){
-        return material;
+        return Material.AIR;
     }
 
     public Location getLocation(){
-        return location;
+        return new Location(Bukkit.getWorld("world"), 0, 0, 0);
     }
 
     public void open(){
-        location.getBlock().setType(Material.AIR);
+        Fnaf.getInstance().getServer().getPluginManager().callEvent(new DoorUseEvent(this, true));
+
+        getLocation().getBlock().setType(Material.AIR);
         getAbove().getBlock().setType(Material.AIR);
     }
 
     public void close(){
-        location.getBlock().setType(material);
-        getAbove().getBlock().setType(material);
+        Fnaf.getInstance().getServer().getPluginManager().callEvent(new DoorUseEvent(this, false));
+
+        getLocation().getBlock().setType(getMaterial());
+        getAbove().getBlock().setType(getMaterial());
     }
 
     public boolean isClosed(){
-        return location.getBlock().getType() == material || getAbove().getBlock().getType() == material;
+        return getLocation().getBlock().getType() == getMaterial() || getAbove().getBlock().getType() == getMaterial();
     }
 
     private Location getAbove(){
-        Location aboveBlock = location.clone();
+        Location aboveBlock = getLocation().clone();
         aboveBlock.setY(aboveBlock.getY() + 1);
         return aboveBlock;
     }
