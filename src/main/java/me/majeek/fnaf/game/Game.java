@@ -6,6 +6,7 @@ import me.majeek.fnaf.game.camera.CameraManager;
 import me.majeek.fnaf.game.characters.Guard;
 import me.majeek.fnaf.game.characters.animatronic.Animatronic;
 import me.majeek.fnaf.game.characters.animatronic.AnimatronicManager;
+import me.majeek.fnaf.game.characters.animatronic.PirateCove;
 import me.majeek.fnaf.game.data.DataManager;
 import me.majeek.fnaf.game.door.Door;
 import me.majeek.fnaf.game.door.DoorManager;
@@ -40,6 +41,7 @@ public class Game {
 
         for(Animatronic animatronic : animatronics) {
             animatronic.spawn();
+            animatronic.start();
         }
 
         Fnaf.getInstance().getTimeManager().start();
@@ -72,6 +74,8 @@ public class Game {
 
         for(Light light : Fnaf.getInstance().getLightManager().getLights())
             light.unLight();
+
+        PirateCove.close();
 
         Fnaf.getInstance().getExpManager().setTotalExperience(Fnaf.getInstance().getDataManager().getGuard().getPlayer(), 0);
 

@@ -1,7 +1,5 @@
 package me.majeek.fnaf.game.characters.animatronic;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
 import me.majeek.fnaf.files.FnafConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -16,37 +14,50 @@ import java.util.UUID;
 
 public class Animatronic {
     private String name;
+    private int level;
     private Color color;
     private String headTexture;
 
+    private Location spawn;
     private ArmorStand armorStand;
 
-    public Animatronic(String name, Color color, String headTexture){
+    public Animatronic(String name, int level, Color color, String headTexture){
         this.name = name;
+        this.level = level;
         this.color = color;
         this.headTexture = headTexture;
+
+        spawn = new Location(Bukkit.getWorld(FnafConfig.get().getString("world")), FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.x"), FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.y"), FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.z"), (float) FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.yaw"), (float) FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.pitch"));
     }
 
     public String getName(){
         return name;
     }
 
-    public Color getColor(){
-        return color;
+    public int getLevel() {
+        return level;
     }
 
-    public String getHeadTexture() {
-        return headTexture;
+    public Location getSpawn(){
+        return spawn;
     }
 
-    public Location getSpawn() {
-        return new Location(Bukkit.getWorld(FnafConfig.get().getString("world")), FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.x"), FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.y"), FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.z"), (float) FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.yaw"), (float) FnafConfig.get().getDouble("animatronics." + name.toLowerCase() + ".spawn.pitch"));
+    public void setSpawn(Location spawn) {
+        this.spawn = spawn;
+    }
+
+    public ArmorStand getArmorStand() {
+        return armorStand;
+    }
+
+    public void setArmorStand(ArmorStand armorStand) {
+        this.armorStand = armorStand;
     }
 
     @SuppressWarnings("deprecation")
     public void spawn(){
         if(armorStand == null) {
-            armorStand = getSpawn().getWorld().spawn(getSpawn(), ArmorStand.class);
+            armorStand = spawn.getWorld().spawn(spawn, ArmorStand.class);
 
             armorStand.setCustomName(name);
             armorStand.setCustomNameVisible(false);
@@ -75,6 +86,18 @@ public class Animatronic {
             armorStand.setLeggings(leggings);
             armorStand.setBoots(boots);
         }
+    }
+
+    public void start(){
+
+    }
+
+    public void move(){
+
+    }
+
+    public void attack(){
+
     }
 
     public void remove(){
