@@ -50,10 +50,7 @@ public class Game {
 
     public void stop(){
         inProgress = false;
-        reset();
-    }
 
-    private void reset(){
         List<Player> players = new ArrayList<>();
 
         if(Fnaf.getInstance().getDataManager().getGuard() != null && Fnaf.getInstance().getDataManager().getGuard().getPlayer() != null)

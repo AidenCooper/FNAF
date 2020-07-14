@@ -1,5 +1,7 @@
 package me.majeek.fnaf.game.characters.animatronic;
 
+import me.majeek.fnaf.Fnaf;
+import me.majeek.fnaf.events.AnimatronicVisibleEvent;
 import me.majeek.fnaf.files.FnafConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -20,6 +22,7 @@ public class Animatronic {
 
     private Location spawn;
     private ArmorStand armorStand;
+    private boolean visible = true;
 
     public Animatronic(String name, int level, Color color, String headTexture){
         this.name = name;
@@ -54,6 +57,16 @@ public class Animatronic {
         this.armorStand = armorStand;
     }
 
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+
+        Fnaf.getInstance().getServer().getPluginManager().callEvent(new AnimatronicVisibleEvent(this, visible));
+    }
+
     @SuppressWarnings("deprecation")
     public void spawn(){
         if(armorStand == null) {
@@ -63,6 +76,7 @@ public class Animatronic {
             armorStand.setCustomNameVisible(false);
             armorStand.setInvulnerable(true);
             armorStand.setArms(true);
+            armorStand.setBasePlate(false);
 
             ItemStack head = getHead();
             ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
